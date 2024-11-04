@@ -1,0 +1,20 @@
+# Use the official Python 3 base image
+FROM python:3
+
+# Create a directory for the customer service application
+RUN mkdir -p opt/src/customer
+
+# Set the working directory to the new directory
+WORKDIR /opt/src/customer/
+
+# Copy configuration, models, app, and requirements files to the container's working directory
+COPY configuration.py ./configuration.py
+COPY models.py ./models.py
+COPY app.py ./app.py
+COPY requirements.txt ./requirements.txt
+
+# Install Python packages listed in requirements.txt
+RUN pip install -r ./requirements.txt
+
+# Set the entry point to run the app.py file with Python
+ENTRYPOINT ["python", "./app.py"]

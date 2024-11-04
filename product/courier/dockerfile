@@ -1,0 +1,20 @@
+# Use official Python 3 base image
+FROM python:3
+
+# Create directory structure for the courier service application
+RUN mkdir -p /opt/src/courier
+
+# Set working directory
+WORKDIR /opt/src/courier/
+
+# Copy configuration, models, main application, and requirements files into the working directory
+COPY configuration.py ./configuration.py     # Copy configuration file
+COPY models.py ./models.py                   # Copy models file
+COPY app.py ./app.py                         # Copy main application file
+COPY requirements.txt ./requirements.txt     # Copy requirements file for dependencies
+
+# Install required dependencies listed in requirements.txt
+RUN pip install -r ./requirements.txt
+
+# Define entry point to start the application
+ENTRYPOINT ["python", "./app.py"]

@@ -1,0 +1,99 @@
+version: '3'
+
+services:
+    # Service for the user database
+    user_database:
+        image: mysql  # Uses MySQL image for database
+        environment:
+        - MYSQL_ROOT_PASSWORD=root  # Root password for MySQL
+        - MYSQL_DATABASE=User       # Initial database name
+        ports:
+        - 3306:3306  # Exposes MySQL on port 3306
+        volumes:
+        - ./user/init:/docker-entrypoint-initdb.d  # Maps local initialization files to MySQL init directory
+        - user_data:/var/lib/mysql  # Persists MySQL data to avoid data loss on container restart
+        networks:
+        - user_network  # Connects to user network
+
+    # Service for the product database
+    product_database:
+        image: mysql  # Uses MySQL image for the product database
+        environment:
+        - MYSQL_ROOT_PASSWORD=root  # Root password for MySQL
+        - MYSQL_DATABASE=Product    # Initial database name for products
+        ports:
+        - 3307:3306  # Maps port 3307 for product database
+        volumes:
+        - ./product/init:/docker-entrypoint-initdb.d  # Maps initialization files
+        - shop_data:/var/lib/mysql  # Data persistence
+        networks:
+        - shop_network  # Connects to shop network
+
+    # Adminer service for database management
+    adminer:
+        image: adminer  # Uses Adminer image for database UI
+        ports:
+        - 8080:8080  # Maps Adminer on port 8080
+        depends_on:
+        - user_database  # Starts after user_database
+        networks:
+        - user_network
+        - shop_network
+
+    # User service
+    user:
+        image: user  # Docker image for user service
+        ports:
+        - 5000:5000  # Exposes on port 5000
+        environment:
+        - PRODUCTION="PRODUCTION"  # Sets production environment
+        depends_on:
+        - user_database  # Starts after user_database
+        networks:
+        - user_network
+
+    # Customer service
+    customer:
+        image: customer  # Docker image for customer service
+        ports:
+        - 5002:5002  # Exposes on port 5002
+        environment:
+        - PRODUCTION="PRODUCTION"
+        depends_on:
+        - product_database  # Starts after product_database
+        networks:
+        - shop_network
+
+    # Courier service
+    courier:
+        image: courier  # Docker image for courier service
+        ports:
+        - 5003:5003  # Exposes on port 5003
+        environment:
+        - PRODUCTION="PRODUCTION"
+        depends_on:
+        - product_database
+        networks:
+        - shop_network
+
+    # Owner service
+    owner:
+        image: owner  # Docker image for owner service
+        ports:
+        - 5001:5001  # Exposes on port 5001
+        environment:
+        - PRODUCTION="PRODUCTION"
+        depends_on:
+        - product_database
+        networks:
+        - shop_network
+
+    # Network definitions for service isolation
+    networks:
+      user_network:
+      shop_network:
+
+    # Volume definitions for persistent data
+    volumes:
+      user_data:
+      shop_data:

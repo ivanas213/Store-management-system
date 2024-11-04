@@ -1,0 +1,17 @@
+cd user
+docker build -t user:latest -f user.dockerfile .
+cd ..
+cd product
+cd owner
+docker build -t owner:latest .
+cd ..
+cd customer
+docker build -t customer:latest .
+cd ..
+cd courier
+docker build -t courier:latest -f dockerfile .
+
+docker-compose -f development.yaml up -d
+pip install -r ./requirements.txt
+./venv/Scripts/Activate.ps1      
+python -m venv venv 

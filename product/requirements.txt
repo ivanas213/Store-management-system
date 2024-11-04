@@ -1,0 +1,32 @@
+# Flask framework version used for building the application
+flask==3.0.1
+
+# Flask-SQLAlchemy for database interaction and ORM support
+flask-sqlalchemy==3.1.1
+
+# Flask-Migrate for handling SQLAlchemy database migrations
+flask-migrate==2.7.0
+
+# Flask-JWT-Extended for adding JWT authentication to Flask apps
+flask-jwt-extended==4.6.0
+
+# Flask-Script for adding command-line support to Flask applications
+flask_script==2.0.6
+
+# SQLAlchemy-Utils for additional utilities to work with SQLAlchemy
+sqlalchemy_utils==0.41.1
+
+# Werkzeug utility library used by Flask for handling WSGI requests
+Werkzeug==3.0.1
+
+# Flask-CLI for integrating with command-line operations in Flask
+Flask-CLI==0.4.0
+
+# PyMySQL library for interacting with MySQL database via Python
+pymysql==1.1.0
+
+# mysqlclient for alternative MySQL database interaction in Python
+mysqlclient==2.2.1
+
+# Cryptography library for secure handling of data encryption and decryption
+cryptography==42.0.1

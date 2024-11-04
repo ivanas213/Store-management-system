@@ -1,0 +1,14 @@
+flask==3.0.1               # Core Flask framework for building web applications
+flask-sqlalchemy==3.1.1    # SQLAlchemy integration for Flask, enables ORM (Object Relational Mapping)
+flask-migrate==2.7.0       # Flask extension for handling database migrations with Alembic
+flask-jwt-extended==4.6.0  # Extension for managing JSON Web Tokens (JWTs) for authentication
+flask_script==2.0.6        # Provides command-line utilities for managing Flask apps (deprecated but still in use)
+sqlalchemy_utils==0.41.1   # Utilities to complement SQLAlchemy, like specialized data types and utility functions
+Werkzeug==3.0.1            # WSGI (Web Server Gateway Interface) utility library for handling HTTP requests in Flask
+Flask-CLI==0.4.0           # Command-line interface for Flask, helps manage app from terminal
+pymysql==1.1.0             # Pure Python MySQL client library for connecting to MySQL databases
+mysqlclient==2.2.1         # MySQL client library based on C extensions, for improved performance with MySQL
+requests==2.31.0           # HTTP library for making network requests, widely used for API calls
+email-validator==2.1.0     # Library for validating email addresses to ensure correct formatting
+mysql-connector-python==8.3.0  # Official MySQL client for Python, often used for advanced database features
+cryptography==42.0.1       # Library for cryptographic functions, useful for security (e.g., password hashing, encryption)
